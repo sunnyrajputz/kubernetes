@@ -46,15 +46,6 @@ sudo apt update
 ```
 sudo apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
 ```
-
-**Sample Command run on master node**
-
-<kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/a4e7a4af-31fa-40cf-bb9e-64ba18999cb5)</kbd>
-
-<kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/acf157b8-5c7b-44e7-91ef-b5437053be60)</kbd>
-
-<kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/8f960aae-3706-43cd-bac8-1903fbe8196d)</kbd>
-
 ---
 
 ## Master Node
@@ -64,12 +55,7 @@ sudo apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
     ```bash
     sudo kubeadm init
     ```
-    <kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/4fed3d68-eb41-423d-b83f-35c3cc11476e)</kbd>
-
     After succesfully running, your Kubernetes control plane will be initialized successfully.
-
-   <kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/760276f4-9146-4bc1-aa92-48cc1c0b13f4)</kbd>
-
 
 3. Set up local kubeconfig (both for root user and normal user):
 
@@ -79,17 +65,11 @@ sudo apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
     ```
 
-    <kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/f647adc1-0976-490e-b9c9-f6f96908d6fe)</kbd>
-
-
 4. Apply Weave network:
 
     ```bash
     kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
     ```
-
-    <kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/ec7b4684-7719-4d09-81d8-eee27b98972a)</kbd>
-
 
 5. Generate a token for worker nodes to join:
 
@@ -113,15 +93,11 @@ sudo apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
     ```bash
     sudo kubeadm reset pre-flight checks
     ```
-    <kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/3d29912b-f1a3-4e0b-a6ee-6c9cc5db49fb)</kbd>
-
-2. Paste the join command you got from the master node and append `--v=5` at the end.
+    # Note : **  --v=5  **
+2. Paste the join command you got from the master node and append `**--v=5`** at the end.
 *Make sure either you are working as sudo user or use `sudo` before the command*
 
    <kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/c41e3213-7474-43f9-9a7b-a75694be582a)</kbd>
-
-   After succesful join->
-   <kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/c530b65a-4afd-4b1d-9748-421c216d64cd)</kbd>
 
 ---
 
@@ -132,8 +108,6 @@ On Master Node:
 ```bash
 kubectl get nodes
 ```
-<kbd>![image](https://github.com/paragpallavsingh/kubernetes-kickstarter/assets/40052830/4ed4dcac-502a-4cc1-a63e-c9cbb0199428)</kbd>
-
 ---
 
 ## Optional: Labeling Nodes
