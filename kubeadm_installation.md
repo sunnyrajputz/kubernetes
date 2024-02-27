@@ -16,20 +16,34 @@ This guide outlines the steps needed to set up a Kubernetes cluster using kubead
 Run the following commands on both the master and worker nodes to prepare them for kubeadm.
 
 ```bash
-# using 'sudo su' is not a good practice.
 sudo apt update
 sudo apt-get install -y apt-transport-https ca-certificates curl
+```
+# Install docker.
+```
 sudo apt install docker.io -y
+```
 
-sudo systemctl enable --now docker # enable and start in single command.
+# Enable and start in single command.
+```
+sudo systemctl enable --now docker 
+```
 
 # Adding GPG keys.
+```
 curl -fsSL "https://packages.cloud.google.com/apt/doc/apt-key.gpg" | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/kubernetes-archive-keyring.gpg
+```
 
 # Add the repository to the sourcelist.
+```
 echo 'deb https://packages.cloud.google.com/apt kubernetes-xenial main' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-sudo apt update 
+```
+# Update Packages:
+```
+sudo apt update
+```
+# Install Kubeadm supported version:
+```
 sudo apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
 ```
 
