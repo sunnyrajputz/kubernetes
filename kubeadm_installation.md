@@ -18,13 +18,14 @@ Run the following commands on both the master and worker nodes to prepare them f
 ```
 free -h
 ```
+```
 swapoff -a
+```
 
 # Disable all the swap entries
 ```
 vi /etc/fstab
-
-
+```
 
 ```bash
 sudo apt update
