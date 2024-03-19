@@ -18,6 +18,8 @@ Run the following commands on both the master and worker nodes to prepare them f
 ```
 free -h
 ```
+swapoff -a
+```
 
 
 ```bash
