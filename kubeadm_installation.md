@@ -14,6 +14,11 @@ This guide outlines the steps needed to set up a Kubernetes cluster using kubead
 ## Both Master & Worker Node
 
 Run the following commands on both the master and worker nodes to prepare them for kubeadm.
+# SWAP isenable or not
+```
+free -h
+```
+
 
 ```bash
 sudo apt update
