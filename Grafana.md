@@ -26,6 +26,12 @@ sudo apt-get update
 ```
 sudo apt-get install grafana
 ```
+# To start Grafana Server
+```
+sudo /bin/systemctl start grafana-server
+sudo /bin/systemctl enable grafana-server
+sudo /bin/systemctl status grafana-server
+```
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Install Loki and Promtail using Docker
@@ -70,10 +76,49 @@ scrape_configs:
   static_configs:
   - targets:
     - cadvisor:8080
+```
+
+# Using Docker Compose
+
+```
+version: '3.2'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+    - 9090:9090
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+  - cadvisor
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+    - 8080:8080
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    depends_on:
+    - redis
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+    - 6379:6379
+  ```
+#  Verify
+```
+docker-compose up -d
+docker-compose ps
+```
+Test PromQL
+rate(container_cpu_usage_seconds_total{name="redis"}[1m])
+container_memory_usage_bytes{name="redis"}
 
 
-```
-# To start Grafana Server
-```
-sudo /bin/systemctl status grafana-server
-```
